@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Анкета заявителя Мозаик Виза</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f4f8; color: #333; }
+    .form-container { max-width: 650px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    h2 { color: #1e3a8a; text-align: center; margin-top: 0; margin-bottom: 25px; font-size: 24px; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; }
+    .section-title { font-size: 16px; font-weight: bold; color: #2563eb; margin-top: 25px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; border-left: 4px solid #2563eb; padding-left: 8px; }
+    .input-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #4a5568; }
+    input[type="text"], input[type="email"], select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; transition: border-color 0.2s; background-color: #fff; }
+    input[type="text"]:focus, input[type="email"]:focus, select:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+    input[type="file"] { width: 100%; padding: 8px; border: 1px dashed #cbd5e1; border-radius: 6px; box-sizing: border-box; background-color: #f8fafc; cursor: pointer; }
+    .file-hint { font-size: 12px; color: #64748b; margin-top: 4px; }
+    button { width: 100%; padding: 14px; background-color: #2563eb; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background-color 0.2s; }
+    button:hover { background-color: #1d4ed8; }
+    button:disabled { background-color: #94a3b8; cursor: not-allowed; }
+    #status { margin-top: 20px; text-align: center; font-weight: bold; font-size: 15px; padding: 10px; border-radius: 6px; display: none; }
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 4px; display: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Анкета Мозаик Виза</h2>
+  <form id="visaForm" onsubmit="handleFormSubmit(); return false;">
+    
+    <div class="section-title">Основная информация о поездке</div>
+    
+    <div class="input-group">
+      <label>Тип визы (visa_type) *</label>
+      <select name="visa_type" required>
+        <option value="" disabled selected>Выберите тип визы...</option>
+        <option value="Accompaniment Single">Accompaniment Single</option>
+        <option value="Business Multiple">Business Multiple</option>
+        <option value="Business Single">Business Single</option>
+        <option value="Conference/Sport/Meeting Single">Conference/Sport/Meeting Single</option>
+        <option value="Double Transit">Double Transit</option>
+        <option value="Driver Multiple">Driver Multiple</option>
+        <option value="Family Re-Union Single">Family Re-Union Single</option>
+        <option value="Guest Residence Single">Guest Residence Single</option>
+        <option value="Medical Accompaniment Multiple">Medical Accompaniment Multiple</option>
+        <option value="Medical Accompaniment Single">Medical Accompaniment Single</option>
+        <option value="Medical Multiple">Medical Multiple</option>
+        <option value="Medical Single">Medical Single</option>
+        <option value="Montage and Repair Multiple">Montage and Repair Multiple</option>
+        <option value="Single Transit">Single Transit</option>
+        <option value="Student (Lise) Single">Student (Lise) Single</option>
+        <option value="Student Accompaniment Single">Student Accompaniment Single</option>
+        <option value="Student Single">Student Single</option>
+        <option value="TOMER Visa Single">TOMER Visa Single</option>
+        <option value="Tour Operator Single">Tour Operator Single</option>
+        <option value="Tourism Multiple">Tourism Multiple</option>
+        <option value="Tourism Single">Tourism Single</option>
+        <option value="Touristic Residence Single">Touristic Residence Single</option>
+        <option value="Work Accompaniment Single">Work Accompaniment Single</option>
+        <option value="Work Permit Single">Work Permit Single</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Гражданство (nationality_code) *</label>
+      <select name="nationality_code" required>
+        <option value="" disabled selected>Выберите код страны...</option>
+        <option value="TM">TM (Туркменистан)</option>
+        <option value="UZ">UZ (Узбекистан)</option>
+        <option value="RU">RU (Россия)</option>
+      </select>
+    </div>
+
+    <div class="section-title">Личные данные заявителя</div>
+
+    <div class="input-group">
+      <label>Имя (first_name) * <span style="color:#2563eb; font-size:12px;">(только ENG)</span></label>
+      <input type="text" name="first_name" pattern="[A-Za-z\s]+" title="Заполняйте строго на английском языке" required placeholder="Ivan">
+    </div>
+    
+    <div class="input-group">
+      <label>Фамилия (surename) * <span style="color:#2563eb; font-size:12px;">(только ENG)</span></label>
+      <input type="text" name="surename" pattern="[A-Za-z\s]+" title="Заполняйте строго на английском языке" required placeholder="Ivanov">
+    </div>
+
+    <div class="input-group">
+      <label>Пол (gender_code) *</label>
+      <select name="gender_code" required>
+        <option value="" disabled selected>Выберите пол...</option>
+        <option value="Male">Male (Мужской)</option>
+        <option value="Female">Female (Женский)</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Дата рождения (date_of_birth) * <span style="color:#64748b; font-size:12px;">(ДД.ММ.ГГГГ)</span></label>
+      <input type="text" name="date_of_birth" pattern="(0[1-9]|[12][0-9]|3[01])[-./](0[1-9]|1[012])[-./](19|20)\d\d" title="Формат: ДД.ММ.ГГГГ, ДД/ММ/ГГГГ или ДД-ММ-ГГГГ" required placeholder="15.08.1995">
+    </div>
+
+    <div class="input-group">
+      <label>Место рождения (place_of_birth) *</label>
+      <input type="text" name="place_of_birth" required placeholder="Город, страна">
+    </div>
+
+    <div class="input-group">
+      <label>Семейное положение (maritial_status) *</label>
+      <select name="maritial_status" required>
+        <option value="" disabled selected>Выберите статус...</option>
+        <option value="Single">Single (Холост / Незамужем)</option>
+        <option value="Married">Married (В браке)</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Имя отца (fathers_name) *</label>
+      <input type="text" name="fathers_name" required>
+    </div>
+
+    <div class="input-group">
+      <label>Имя матери (mothers_name) *</label>
+      <input type="text" name="mothers_name" required>
+    </div>
+
+    <div class="input-group">
+      <label>Род деятельности / Профессия (occupation_code) *</label>
+      <select name="occupation_code" required>
+        <option value="" disabled selected>Выберите профессию...</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Armed/Security Force">Armed/Security Force</option>
+        <option value="Artist/Performer">Artist/Performer</option>
+        <option value="Business">Business</option>
+        <option value="Caregiver/Babysitter">Caregiver/Babysitter</option>
+        <option value="Construction">Construction</option>
+        <option value="Culinary/Cookery">Culinary/Cookery</option>
+        <option value="Driver/Lorry">Driver/Lorry</option>
+        <option value="Education/Training">Education/Training</option>
+        <option value="Engineer">Engineer</option>
+        <option value="Finance/Banking">Finance/Banking</option>
+        <option value="Government">Government</option>
+        <option value="Health/Medical">Health/Medical</option>
+        <option value="Information Technologies">Information Technologies</option>
+        <option value="Legal Professional">Legal Professional</option>
+        <option value="Other">Other</option>
+        <option value="Press/Media">Press/Media</option>
+        <option value="Professional Sportsperson">Professional Sportsperson</option>
+        <option value="Religious Functionary">Religious Functionary</option>
+        <option value="Researcher/Scient Scientist">Researcher/Scient Scientist</option>
+        <option value="Retired">Retired</option>
+        <option value="Seafarer">Seafarer</option>
+        <option value="Self-Employed">Self-Employed</option>
+        <option value="Service Sector">Service Sector</option>
+        <option value="Student/Trainee">Student/Trainee</option>
+        <option value="Tourism">Tourism</option>
+        <option value="Unemployed">Unemployed</option>
+      </select>
+    </div>
+
+    <div class="section-title">Паспортные данные</div>
+
+    <div class="input-group">
+      <label>Номер паспорта (passport_no) * <span style="color:#2563eb; font-size:12px;">(только ENG)</span></label>
+      <input type="text" name="passport_no" pattern="[A-Za-z0-9\s]+" title="Заполняйте строго английскими буквами и цифрами" required placeholder="A1234567">
+    </div>
+
+    <div class="input-group">
+      <label>Дата выдачи паспорта (passport_issue_date) *</label>
+      <input type="text" name="passport_issue_date" pattern="(0[1-9]|[12][0-9]|3[01])[-./](0[1-9]|1[012])[-./](19|20)\d\d" required placeholder="10.01.2020">
+    </div>
+
+    <div class="input-group">
+      <label>Срок действия паспорта (passport_expire_date) *</label>
+      <input type="text" name="passport_expire_date" pattern="(0[1-9]|[12][0-9]|3[01])[-./](0[1-9]|1[012])[-./](19|20)\d\d" required placeholder="10.01.2030">
+    </div>
+
+    <div class="section-title">Адрес проживания и контакты</div>
+
+    <div class="input-group">
+      <label>Адрес проживания (residence_adress) *</label>
+      <input type="text" name="residence_adress" required placeholder="Улица, дом, квартира">
+    </div>
+
+    <div class="input-group">
+      <label>Город проживания (residence_city) *</label>
+      <input type="text" name="residence_city" required>
+    </div>
+
+    <div class="input-group">
+      <label>Почтовый индекс (residence_zipcode) *</label>
+      <input type="text" name="residence_zipcode" required>
+    </div>
+
+    <div class="input-group">
+      <label>Email (email_address) *</label>
+      <input type="email" name="email_address" required placeholder="example@mail.com">
+    </div>
+
+    <div class="input-group">
+      <label>Номер телефона (mobile_number) * <span style="color:#dc2626; font-size:12px;">(Без +993, начните с 8)</span></label>
+      <input type="text" id="phoneInput" name="mobile_number" pattern="8[0-9]{8}" title="Формат: 8XXXXXXXX" required placeholder="865123456" oninput="validatePhone(this)">
+      <div id="phoneError" class="error-msg">⚠️ Ошибка: Станция 71 не проходит регистрацию в ВЦ. Пожалуйста, введите другой номер телефона.</div>
+    </div>
+
+    <div class="section-title">Даты поездки</div>
+
+    <div class="input-group">
+      <label>Дата выезда (custom_depature) *</label>
+      <input type="text" name="custom_depature" pattern="(0[1-9]|[12][0-9]|3[01])[-./](0[1-9]|1[012])[-./](19|20)\d\d" required placeholder="01.09.2026">
+    </div>
+
+    <div class="input-group">
+      <label>Дата возвращения (custom_return) *</label>
+      <input type="text" name="custom_return" pattern="(0[1-9]|[12][0-9]|3[01])[-./](0[1-9]|1[012])[-./](19|20)\d\d" required placeholder="15.09.2026">
+    </div>
+
+    <div class="section-title">Документы</div>
+
+    <div class="input-group">
+      <label>Копия загранпаспорта (скан/фото) *</label>
+      <input type="file" id="passportFile" name="passportFile" accept="image/*,.pdf" required onchange="validateFileSize(this)">
+      <div class="file-hint">Максимальный размер файла: 2 МБ.</div>
+      <div id="fileError" class="error-msg">❌ Ошибка: Размер файла превышает 2 МБ!</div>
+    </div>
+    
+    <button type="submit" id="submitBtn">Отправить анкету</button>
+  </form>
+  
+  <div id="status"></div>
+</div>
+
+<script>
+  // Ваша актуальная ссылка Google Веб-приложения
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWE323MlPBJNzQTWcw99alKPewlMQBWnGKzzrcupv0aXWTRNntjOOQ63HDaCl0nCXKIA/exec";
+
+  function validatePhone(input) {
+    var errorDiv = document.getElementById('phoneError');
+    var submitBtn = document.getElementById('submitBtn');
+    if (input.value.indexOf('871') === 0) {
+      errorDiv.style.display = 'block';
+      submitBtn.disabled = true;
+    } else {
+      errorDiv.style.display = 'none';
+      submitBtn.disabled = false;
+    }
+  }
+
+  function validateFileSize(input) {
+    var errorDiv = document.getElementById('fileError');
+    var submitBtn = document.getElementById('submitBtn');
+    var file = input.files[0];
+    if (file && file.size > 2 * 1024 * 1024) {
+      errorDiv.style.display = 'block';
+      submitBtn.disabled = true;
+      input.value = ''; 
+    } else {
+      errorDiv.style.display = 'none';
+      submitBtn.disabled = false;
+    }
+  }
+
+  function handleFormSubmit() {
+    const form = document.getElementById('visaForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusDiv = document.getElementById('status');
+    
+    submitBtn.disabled = true;
+    statusDiv.style.display = 'block';
+    statusDiv.innerHTML = "⏳ Отправка данных и загрузка паспорта... Пожалуйста, подождите.";
+    statusDiv.style.backgroundColor = "#fef3c7";
+    statusDiv.style.color = "#d97706";
+
+    const fileInput = document.getElementById('passportFile');
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      const base64String = e.target.result.split(',')[1];
+      
+      const formData = {};
+      new FormData(form).forEach((value, key) => {
+        if (key !== 'passportFile') formData[key] = value;
+      });
+      
+      formData.passportFileBase64 = base64String;
+      formData.passportFileType = file.type;
+      formData.passportFileName = file.name;
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.status === 'success') {
+          statusDiv.innerHTML = data.message;
+          statusDiv.style.backgroundColor = "#dcfce7";
+          statusDiv.style.color = "#15803d";
+          form.reset();
+        } else {
+          throw new Error(data.message);
+        }
+        submitBtn.disabled = false;
+      })
+      .catch(err => {
+        statusDiv.innerHTML = "❌ Ошибка при отправке: " + err.toString();
+        statusDiv.style.backgroundColor = "#fee2e2";
+        statusDiv.style.color = "#b91c1c";
+        submitBtn.disabled = false;
+      });
+    };
+
+    reader.readAsDataURL(file);
+  }
+</script>
+
+</body>
+</html>
